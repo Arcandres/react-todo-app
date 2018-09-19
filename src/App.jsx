@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   addTask = task => {
-
+    this.setState()
     // Check for empty task
     if (!task) {
       return
