@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   addTask = task => {
-    this.setState()
     // Check for empty task
     if (!task) {
       return
@@ -34,16 +33,17 @@ class App extends React.Component {
        * Lets create the local storage
        */
       tasks.push(task)
-      return localStorage.setItem('tasks', JSON.stringify(tasks))
+      localStorage.setItem('tasks', JSON.stringify(tasks))
 
+    } else {
+      // Retrieve the storage
+      tasks = JSON.parse(localStorage.getItem('tasks'))
+      tasks.push(task)
+  
+      // Rewrite the storage with new data
+      localStorage.setItem('tasks', JSON.stringify(tasks))
     }
 
-    // Retrieve the storage
-    tasks = JSON.parse(localStorage.getItem('tasks'))
-    tasks.push(task)
-
-    // Rewrite the storage with new data
-    localStorage.setItem('tasks', JSON.stringify(tasks))
 
     // Populate the state
     this.setState(({
