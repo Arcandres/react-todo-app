@@ -5,12 +5,8 @@ import Navigation from "./components/Navigation"
 import TodoForm from "./components/TodoForm"
 
 class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      // Objects array
-      todos: []
-    }
+  state = {
+    todos: []
   }
 
   getTasks() {
