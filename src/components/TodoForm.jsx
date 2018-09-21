@@ -1,9 +1,11 @@
 import React from "react"
+import './TodoForm.css'
 
 class TodoForm extends React.Component {
   getData = e => (
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      completed: false
     })
   )
 
