@@ -1,0 +1,11 @@
+.completed {
+  opacity: .5
+}
+
+.completed .card {
+  box-shadow: 0 0 5px rgba(0, 255, 100, .5);
+}
+
+.completed .card h3 {
+  text-decoration: line-through
+}
