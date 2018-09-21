@@ -39,7 +39,7 @@ class App extends React.Component {
       // Retrieve the storage
       tasks = JSON.parse(localStorage.getItem('tasks'))
       tasks.push(task)
-  
+
       // Rewrite the storage with new data
       localStorage.setItem('tasks', JSON.stringify(tasks))
     }
@@ -49,6 +49,20 @@ class App extends React.Component {
     this.setState(({
       todos: JSON.parse(localStorage.getItem('tasks'))
     }))
+  }
+
+  isComplete = (e, key) => {
+    // Save current task
+    const task = this.state.todos[key]
+
+    // Delete it
+    this.setState(prevState => prevState.todos.splice(key, 1))
+    
+    task.completed = !task.completed
+
+    // Added it, but now is completed
+    this.setState(prevState => prevState.todos.push(task))
+    localStorage.setItem('tasks', JSON.stringify(this.state.todos))
   }
 
   deleteTask = key => {
@@ -80,28 +94,33 @@ class App extends React.Component {
         return null;
       }
 
-      return (<div className="col-md-3 mb-4" key={key}>
-        <div className="card">
-          <div className="card-header">
-            <h3>{todo.title}</h3>
-            <span className="badge bagde-pill badge-danger ml-2">
-              {todo.priority}
-            </span>
-          </div>
-          <div className="card-body">
-            <p>{todo.description}</p>
-            <div className="mb-4">
-              <mark>{todo.author}</mark>
+      return (
+        <div className={todo.completed ? 'col-md-3 mb-4 completed' : 'col-md-3 mb-4'} key={key}>
+          <div className="card">
+            <div className="card-header">
+              <h3>
+                {todo.title}
+                <input onClick={e => this.isComplete(e, key)} type="checkbox" checked={ todo.completed ? true : false}/>
+              </h3>
+              <span className="badge bagde-pill badge-danger ml-2">
+                {todo.priority}
+              </span>
             </div>
-            <button
-              className="btn btn-danger"
-              onClick={() => this.deleteTask(key)}
-            >
-              Delete
+            <div className="card-body">
+              <p>{todo.description}</p>
+              <div className="mb-4">
+                <mark>{todo.author}</mark>
+              </div>
+              <button
+                className="btn btn-danger"
+                onClick={() => this.deleteTask(key)}
+              >
+                Delete
             </button>
+            </div>
           </div>
         </div>
-      </div>)
+      )
     })
 
     return (
