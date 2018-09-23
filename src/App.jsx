@@ -47,7 +47,7 @@ class App extends React.Component {
     }))
   }
 
-  isComplete = (e, key) => {
+  isComplete = (key) => {
     // Save current task
     const task = this.state.todos[key]
 
@@ -96,7 +96,7 @@ class App extends React.Component {
             <div className="card-header">
               <h3>
                 {todo.title}
-                <input onClick={e => this.isComplete(e, key)} type="checkbox" checked={ todo.completed ? true : false}/>
+                <input onClick={() => this.isComplete(key)} type="checkbox" checked={ todo.completed ? true : false}/>
               </h3>
               <span className="badge bagde-pill badge-danger ml-2">
                 {todo.priority}
