@@ -53,7 +53,7 @@ class App extends React.Component {
 
     // Delete it
     this.setState(prevState => prevState.todos.splice(key, 1))
-    
+
     task.completed = !task.completed
 
     // Added it, but now is completed
@@ -96,7 +96,7 @@ class App extends React.Component {
             <div className="card-header">
               <h3>
                 {todo.title}
-                <input onClick={() => this.isComplete(key)} type="checkbox" checked={ todo.completed ? true : false}/>
+                <input onClick={() => this.isComplete(key)} type="checkbox" defaultChecked={todo.completed ? true : false} />
               </h3>
               <span className="badge bagde-pill badge-danger ml-2">
                 {todo.priority}
